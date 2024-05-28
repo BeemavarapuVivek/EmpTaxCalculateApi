@@ -3,6 +3,9 @@ package com.viz.empDemo.dto;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.List;
 
@@ -28,27 +31,22 @@ public class EmpMapper {
 		return totalTax;
 	}
 	
-	public Double findEmployeeSalaryBasedOnDateOfJoining(Date doj,Double totalSalary) {
-		SimpleDateFormat format= new SimpleDateFormat("yyyy-MM-dd");
+	public Double findEmployeeSalaryBasedOnDateOfJoining(Date doj,Double totalSalary) throws ParseException {
+		
 		double 	actualSalaryPerYar=0.0;
-		try {
-			java.util.Date date  = format.parse("2024-05-16");
-			if(doj.equals(date) || doj.before(date)) {
-				double monthlySal=totalSalary/12;
-				double halfMonthSal=monthlySal/2;
-				double removableSalary=halfMonthSal+monthlySal;
-				actualSalaryPerYar=totalSalary-removableSalary;
-			}else {
-				actualSalaryPerYar=totalSalary;
-				return actualSalaryPerYar;
-			}
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		LocalDate financialStartDate=LocalDate.of(2024,04,01);
+		LocalDate dojInLocalDate=doj.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+		Long noOfMonths= ChronoUnit.MONTHS.between(financialStartDate,dojInLocalDate);
+		Long remaningDays=ChronoUnit.DAYS.between(financialStartDate.plusMonths(noOfMonths),dojInLocalDate);
+		double monthlySal=totalSalary/12;
+		double daySal=monthlySal/30;
 		
+		double removableMonthsSal=noOfMonths*monthlySal;
+		double removableDaySal=remaningDays*daySal;
+		double totalRemovableSal=removableMonthsSal+removableDaySal;
 		
-		return 0.0;
+		actualSalaryPerYar=totalSalary-totalRemovableSal;
+		return actualSalaryPerYar;
 	}
 	public Employee convertEmpdtoToEmpEntity(EmpBean empBean){
 		String phoneNumbers =convertListOfPhoneToString(empBean.getPhoneNumbers());

@@ -45,6 +45,8 @@ public class EmpServiceImpl implements EmpService {
 			return employeeResponseBean;
 		}catch(Exception enf) {
 			throw new EmployeeNotFoundException("Employee not existed in the  Data Base");
+		}finally {
+			
 		}
 	}
 
@@ -66,6 +68,8 @@ public class EmpServiceImpl implements EmpService {
 			return empObj;
 		}catch(Exception de) {
 			throw new DataSourceException("DB connectvity issue");
+		}finally {
+			
 		}
 		
 	}
