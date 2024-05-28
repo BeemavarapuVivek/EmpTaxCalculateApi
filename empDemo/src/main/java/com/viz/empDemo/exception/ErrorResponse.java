@@ -1,7 +1,10 @@
 package com.viz.empDemo.exception;
 
+import lombok.Getter;
+import lombok.Setter;
 
-
+@Getter
+@Setter
 public class ErrorResponse {
 
 	private String msg;
@@ -14,21 +17,6 @@ public class ErrorResponse {
 		this.statusCode = statusCode;
 	}
 
-	public String getMsg() {
-		return msg;
-	}
-
-	public void setMsg(String msg) {
-		this.msg = msg;
-	}
-
-	public int getStatusCode() {
-		return statusCode;
-	}
-
-	public void setStatusCode(int statusCode) {
-		this.statusCode = statusCode;
-	}
 	
 	
 	

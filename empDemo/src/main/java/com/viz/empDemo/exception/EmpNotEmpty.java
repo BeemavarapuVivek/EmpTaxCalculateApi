@@ -1,5 +1,10 @@
 package com.viz.empDemo.exception;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class EmpNotEmpty extends RuntimeException {
 	/**
 	 * 
@@ -12,14 +17,6 @@ public class EmpNotEmpty extends RuntimeException {
 	}
 	public EmpNotEmpty(String msg) {
 		super(msg);
-		this.msg = msg;
-	}
-
-	public String getMsg() {
-		return msg;
-	}
-
-	public void setMsg(String msg) {
 		this.msg = msg;
 	}
 }
