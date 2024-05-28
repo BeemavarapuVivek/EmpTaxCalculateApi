@@ -19,6 +19,8 @@ import com.viz.empDemo.exception.EmpNotEmpty;
 import com.viz.empDemo.exception.EmployeeNotFoundException;
 import com.viz.empDemo.service.EmpService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/api/emp")
 public class EmpController {
@@ -40,7 +42,7 @@ public class EmpController {
 	}
 	
 	@PostMapping("/save")
-	public ResponseEntity<Employee> saveEmployee(@RequestBody EmpBean empBean) throws EmpNotEmpty,DataSourceException, Exception {
+	public ResponseEntity<Employee> saveEmployee(@RequestBody @Valid EmpBean empBean) throws EmpNotEmpty,DataSourceException, Exception {
 		return ResponseEntity.ok(empService.saveEmployee(empBean));
 	}
 }

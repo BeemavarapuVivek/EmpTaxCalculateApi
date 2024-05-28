@@ -44,9 +44,7 @@ public class EmpServiceImpl implements EmpService {
 			employeeResponseBean=new EmployeeResponseBean(emp.getFirstName().substring(0,3), emp.getFirstName(), emp.getLastName(), emp.getEmail(), Math.floor(actualSlary), Math.floor(totalTax), Math.floor(calculateCessAmount));
 			return employeeResponseBean;
 		}catch(Exception enf) {
-			throw new EmployeeNotFoundException("Employee not existed in the  Data Base");
-		}finally {
-			
+			throw new EmployeeNotFoundException("Employee "+id+"not found in the  Data Base");
 		}
 	}
 
@@ -68,8 +66,6 @@ public class EmpServiceImpl implements EmpService {
 			return empObj;
 		}catch(Exception de) {
 			throw new DataSourceException("DB connectvity issue");
-		}finally {
-			
 		}
 		
 	}

@@ -11,7 +11,7 @@ public class EmpNotEmpty extends RuntimeException {
 		
 	}
 	public EmpNotEmpty(String msg) {
-		super();
+		super(msg);
 		this.msg = msg;
 	}
 

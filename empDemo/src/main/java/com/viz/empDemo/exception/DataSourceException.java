@@ -12,7 +12,7 @@ public class DataSourceException extends RuntimeException{
 		
 	}
 	public DataSourceException(String msg) {
-		super();
+		super(msg);
 		this.msg = msg;
 	}
 
