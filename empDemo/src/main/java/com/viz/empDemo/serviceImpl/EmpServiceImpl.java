@@ -1,6 +1,6 @@
 package com.viz.empDemo.serviceImpl;
 
-import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +41,7 @@ public class EmpServiceImpl implements EmpService {
 				calculateCessAmount=((actualSlary*2)/100);
 				actualSlary=actualSlary-calculateCessAmount;
 			}
-			employeeResponseBean=new EmployeeResponseBean(emp.getFirstName().substring(0,3), emp.getFirstName(), emp.getLastName(), emp.getEmail(), actualSlary, totalTax, calculateCessAmount);
+			employeeResponseBean=new EmployeeResponseBean(emp.getFirstName().substring(0,3), emp.getFirstName(), emp.getLastName(), emp.getEmail(), Math.floor(actualSlary), Math.floor(totalTax), Math.floor(calculateCessAmount));
 			return employeeResponseBean;
 		}catch(Exception enf) {
 			throw new EmployeeNotFoundException("Employee not existed in the  Data Base");
@@ -72,6 +72,12 @@ public class EmpServiceImpl implements EmpService {
 			
 		}
 		
+	}
+
+	@Override
+	public List<Employee> findAllEmployee() throws EmployeeNotFoundException, Exception {
+		
+		return empRepository.findAll();
 	}
 	
 	

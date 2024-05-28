@@ -1,5 +1,7 @@
 package com.viz.empDemo.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,6 +31,14 @@ public class EmpController {
 		System.out.println("find emp details::");
 		return ResponseEntity.ok(empService.findEmployeeDetails(empId));
 	}
+	
+	
+	@GetMapping("/findAll")
+	public ResponseEntity<List<Employee>> findAllEmployee() throws EmployeeNotFoundException, Exception {
+		System.out.println("find emp details::");
+		return ResponseEntity.ok(empService.findAllEmployee());
+	}
+	
 	@PostMapping("/save")
 	public ResponseEntity<Employee> saveEmployee(@RequestBody EmpBean empBean) throws EmpNotEmpty,DataSourceException, Exception {
 		return ResponseEntity.ok(empService.saveEmployee(empBean));
